@@ -44,4 +44,6 @@ def ipv4DDNS(sub_domain):
     updateDNS(config,sub_domain,get_ip(),'A')
 
 ipv6DDNS('@') 
+ipv6DDNS('www')
+ipv4DDNS('abc')
     
