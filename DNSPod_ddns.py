@@ -7,6 +7,13 @@
 import socket
 import requests
 
+
+config = {'login_token':'tokenid,token', #add your own toke
+        'format':'json'
+        'domain_id':'id',              #add your own domain_i
+        'record_id':'id',              #add your own record_
+        'record_line_id':'0'}
+
 def get_ipv6():
     sock = socket.socket(socket.AF_INET6,socket.SOCK_DGRAM)
     sock.connect(('2001:4860:4860::8888',80))
@@ -21,16 +28,19 @@ def get_ip():
     sock.close()
     return ip
 
-url = 'https://dnsapi.cn/Record.Modify'
-
-data = {'login_token':'tokenid,token', #add your own token
-        'format':'json',
-        'domain_id':'id',              #add your own domain_id
-        'record_id':'id',              #add your own record_id
-        'sub_domain':'www',            #change your intended sub_domain
-        'value':get_ip(),              #use get_ipv6() for ipv6
-        'record_type':'A',             #AAAA for ipv6
-        'record_line_id':'0'}
-        
-res = requests.post(url=url,data=data)
-print(res.text)
+def updateDNS(config,sub_domain,ip,record_type):
+    config['sub_domain']=sub_domain
+    config['value']=ip
+    config['record_type']=record_type
+    res = requests.post(url = 'https://dnsapi.cn/Record.Modify',data=config)
+    print(res.text)
+    
+def IPv6DDNS(sub_domain):
+    updateDNS(config,sub_domain,get_ipv6(),'AAAA')
+    
+def IPv4DDNS(sub_domain):
+    updateDNS(config,sub_domain,get_ip(),'A')
+ 
+ 
+IPv6DDNS('@') 
+    
