@@ -37,11 +37,11 @@ def updateDNS(config,sub_domain,ip,record_type):
     res = requests.post(url = 'https://dnsapi.cn/Record.Modify',data=config)
     print(res.text)
     
-def IPv6DDNS(sub_domain):
+def ipv6DDNS(sub_domain):
     updateDNS(config,sub_domain,get_ipv6(),'AAAA')
     
-def IPv4DDNS(sub_domain):
+def ipv4DDNS(sub_domain):
     updateDNS(config,sub_domain,get_ip(),'A')
- 
-IPv6DDNS('@') 
+
+ipv6DDNS('@') 
     
