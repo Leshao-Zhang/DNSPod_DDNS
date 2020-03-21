@@ -8,11 +8,13 @@ import socket
 import requests
 
 
-config = {'login_token':'tokenid,token', #add your own toke
-        'format':'json'
-        'domain_id':'id',              #add your own domain_i
-        'record_id':'id',              #add your own record_
-        'record_line_id':'0'}
+config = {
+          'login_token':'tokenid,token', #add your own token
+          'format':'json'
+          'domain_id':'id',              #add your own domain_id
+          'record_id':'id',              #add your own record_id
+          'record_line_id':'0'
+         }
 
 def get_ipv6():
     sock = socket.socket(socket.AF_INET6,socket.SOCK_DGRAM)
@@ -40,7 +42,6 @@ def IPv6DDNS(sub_domain):
     
 def IPv4DDNS(sub_domain):
     updateDNS(config,sub_domain,get_ip(),'A')
- 
  
 IPv6DDNS('@') 
     
